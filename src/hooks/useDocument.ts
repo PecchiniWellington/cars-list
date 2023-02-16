@@ -1,8 +1,8 @@
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 import { projectFirestore } from "../firebase/config";
 
-const useDocument = (collection: any, id: any) => {
-  const error: any = ref(null);
+const useDocument = (collection: string, id: string) => {
+  const error: Ref<string | null> = ref(null);
   const isPending = ref(false);
   const docRef = projectFirestore.collection(collection).doc(id);
 
@@ -14,7 +14,7 @@ const useDocument = (collection: any, id: any) => {
       const res = await docRef.delete();
       isPending.value = false;
       return res;
-    } catch (err: any) {
+    } catch (err: any | unknown) {
       isPending.value = false;
       error.value = "could not delete the document";
     }
@@ -28,7 +28,7 @@ const useDocument = (collection: any, id: any) => {
       const res = await docRef.update(updates);
       isPending.value = false;
       return res;
-    } catch (err: any) {
+    } catch (err: any | unknown) {
       isPending.value = false;
       error.value = "could not update the document";
     }

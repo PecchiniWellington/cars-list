@@ -30,21 +30,21 @@
 </template>
 
 <script lang="ts">
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 import getDocument from "@/hooks/getDocument";
 import useDocument from "@/hooks/useDocument";
 import getUser from "@/hooks/getUser";
-import { computed } from "vue";
 import useStorage from "@/hooks/useStorage";
-import { useRouter } from "vue-router";
 import AddTagView from "@/components/AddTagView.vue";
-import { ROUTES_NAME } from "../../router/constants";
+import { ROUTES_NAME, COLLECTIONS } from "@/router/constants";
 
 export default {
   props: ["id"],
   components: { AddTagView },
   setup(props) {
-    const { error, document: carFleet } = getDocument("carsFleet", props.id);
-    const { deleteDoc, updateDoc } = useDocument("carsFleet", props.id);
+    const { error, document: carFleet } = getDocument(COLLECTIONS.CARS_FEET, props.id);
+    const { deleteDoc, updateDoc } = useDocument(COLLECTIONS.CARS_FEET, props.id);
     const { user } = getUser();
     const { deleteImage } = useStorage();
     const router = useRouter();
@@ -62,8 +62,11 @@ export default {
     };
 
     const handleClick = async (id: string) => {
-      const tags = carFleet.value.tags.filter((tags: any) => tags.id != id);
-      await updateDoc({ tags });
+      if (carFleet.value.tags) {
+        const tags = carFleet.value.tags.filter((tags: any) => tags.id != id);
+
+        await updateDoc({ tags });
+      }
     };
 
     return { error, carFleet, ownership, handleDelete, handleClick };

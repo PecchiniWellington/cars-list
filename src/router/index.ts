@@ -20,7 +20,7 @@ const requiredAuth = (
 ): void => {
   const user = projectAuth.currentUser;
   if (!user) {
-    next({ name: "login" });
+    next({ name: ROUTES_NAME.LOGIN });
   } else {
     next();
   }

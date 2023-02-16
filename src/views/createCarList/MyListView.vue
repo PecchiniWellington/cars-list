@@ -4,9 +4,9 @@
     <div v-if="carsFleet">
       <ListView :carsFleet="carsFleet" />
     </div>
-    <router-link :to="{ name: ROUTES_NAME.CREATE_CAR }" class="btn"
-      >Create a New CarsFleet</router-link
-    >
+    <router-link :to="{ name: ROUTES_NAME.CREATE_CAR }" class="btn">
+      Create a New CarsFleet
+    </router-link>
   </div>
 </template>
 
@@ -14,15 +14,21 @@
 import getUser from "@/hooks/getUser";
 import getCollection from "@/hooks/getCollection";
 import ListView from "@/components/ListView.vue";
-import { ROUTES_NAME } from "../../router/constants";
+import { ROUTES_NAME, COLLECTIONS } from "@/router/constants";
+
 export default {
   components: { ListView },
   setup() {
     const { user } = getUser();
-    const { documents: carsFleet } = getCollection("carsFleet", [
+    let userId = null;
+
+    if (user.value !== null && user.value.uid !== null) {
+      userId = user.value.uid;
+    }
+    const { documents: carsFleet } = getCollection(COLLECTIONS.CARS_FEET, [
       "userId",
       "==",
-      user.value.uid,
+      userId,
     ]);
     return { carsFleet, ROUTES_NAME };
   },
@@ -35,6 +41,7 @@ h2 {
   margin-bottom: 30px;
   border-bottom: 1px solid var(--secondary);
 }
+
 .btn {
   margin-top: 20px;
 }

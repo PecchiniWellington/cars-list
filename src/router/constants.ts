@@ -6,3 +6,10 @@ export const ROUTES_NAME = {
   CARFLEET_DETAILS: "carFleet-details",
   MY_CARFLEET: "my-carFleet",
 };
+
+
+export const COLLECTIONS = {
+  CARS_FEET: "carsFleet",
+};
+
+export const ExtensionFileType = ["image/png", "image/jpeg", "image/jpg"]

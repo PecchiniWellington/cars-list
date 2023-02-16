@@ -1,9 +1,9 @@
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 import { projectAuth } from "../firebase/config";
 
 // refs
-const error = ref(null);
-const isPending = ref(false);
+const error: Ref<null | string> = ref(null);
+const isPending: Ref<boolean> = ref(false);
 
 // logout function
 const logout = async () => {
@@ -13,7 +13,7 @@ const logout = async () => {
   try {
     await projectAuth.signOut();
     isPending.value = false;
-  } catch (err: any) {
+  } catch (err: any | unknown) {
     error.value = err.message;
     isPending.value = false;
   }

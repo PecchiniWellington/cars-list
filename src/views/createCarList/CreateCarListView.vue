@@ -2,18 +2,8 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <h4>Create a New CarsFleet</h4>
-      <input
-        type="text"
-        required
-        placeholder="CarsFleet title"
-        v-model="title"
-      />
-      <textarea
-        required
-        placeholder="CarsFleet description..."
-        v-model="description"
-      ></textarea>
-      <!-- upload carFleet image -->
+      <input type="text" required placeholder="CarsFleet title" v-model="title" />
+      <textarea required placeholder="CarsFleet description..." v-model="description"></textarea>
       <label>Upload CarsFleet Cover Image</label>
       <input type="file" @change="handleChange" />
       <span>OR</span>
@@ -29,26 +19,36 @@
 
 <script lang="ts">
 import { ref } from "vue";
+import type { Ref } from "vue";
+import { useRouter } from "vue-router";
+import type { RouteParamsRaw } from "vue-router";
+import { timestamp } from "@/firebase/config";
+import type {
+  DocumentData,
+  DocumentReference,
+} from "@firebase/firestore-types";
 import useStorage from "@/hooks/useStorage";
 import useCollection from "@/hooks/useCollection";
-import { useRouter } from "vue-router";
 import getUser from "@/hooks/getUser";
-import { timestamp } from "@/firebase/config";
-import { ROUTES_NAME } from "../../router/constants";
+import {
+  ExtensionFileType,
+  ROUTES_NAME,
+  COLLECTIONS,
+} from "../../router/constants";
 
 export default {
   setup() {
     const { filePath, url, uploadImage } = useStorage();
-    const { error, addDoc } = useCollection("carsFleet");
+    const { error, addDoc } = useCollection(COLLECTIONS.CARS_FEET);
     const router = useRouter();
     const { user }: any = getUser();
-    const title = ref("");
-    const description = ref("");
-    const externalUrl = ref("");
-    const file: any = ref(null);
-    const fileError: any = ref(null);
-    const isPending = ref(false);
-    const types = ["image/png", "image/jpeg", "image/jpg"];
+
+    const title: Ref<string> = ref("");
+    const description: Ref<string> = ref("");
+    const externalUrl: Ref<string> = ref("");
+    const file: Ref<string | null | File> = ref(null);
+    const fileError: Ref<string | null> = ref(null);
+    const isPending: Ref<boolean> = ref(false);
 
     const handleSubmit = async () => {
       if (file.value) {
@@ -57,7 +57,7 @@ export default {
 
         await uploadImage(file.value);
 
-        const res = await addDoc({
+        const res: DocumentReference<DocumentData> | undefined = await addDoc({
           title: title.value,
           description: description.value,
           userId: user.value.uid,
@@ -72,14 +72,14 @@ export default {
         if (!error.value) {
           router.push({
             name: ROUTES_NAME.CARFLEET_DETAILS,
-            params: res?.id as any,
+            params: res?.id as RouteParamsRaw | undefined,
           });
         }
       } else {
         /* TODO: clean up */
         isPending.value = true;
 
-        const res = await addDoc({
+        const res: DocumentReference<DocumentData> | undefined = await addDoc({
           title: title.value,
           description: description.value,
           userId: user.value.uid,
@@ -94,7 +94,7 @@ export default {
         if (!error.value) {
           router.push({
             name: ROUTES_NAME.CARFLEET_DETAILS,
-            params: res?.id as any,
+            params: res?.id as RouteParamsRaw | undefined,
           });
         }
       }
@@ -104,7 +104,7 @@ export default {
       const target = e.target as HTMLInputElement;
       let selected = target.files !== null ? target.files[0] : null;
 
-      if (selected && types.includes(selected.type)) {
+      if (selected && ExtensionFileType.includes(selected.type)) {
         file.value = selected;
         fileError.value = null;
       } else {

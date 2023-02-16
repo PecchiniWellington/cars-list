@@ -1,11 +1,13 @@
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, type Ref } from "vue";
 import { projectFirestore } from "../firebase/config";
+import type { DocumentData } from "firebase/firestore";
 
 const getCollection = (collection: any, query?: any) => {
-  const documents = ref(null);
-  const error: any = ref(null);
+  const documents: Ref<{ doc: DocumentData; id: string }[] | null> = ref([
+    { doc: {}, id: "" },
+  ]);
+  const error: Ref<null | string> = ref(null);
 
-  // register the firestore collection reference
   let collectionRef = projectFirestore
     .collection(collection)
     .orderBy("createdAt");
@@ -16,8 +18,10 @@ const getCollection = (collection: any, query?: any) => {
 
   const unsub = collectionRef.onSnapshot(
     (snap) => {
-      const results: any = [];
-      snap.docs.forEach((doc) => {
+      const results: [{ doc: DocumentData; id: string }] = [
+        { doc: {} , id: "" },
+      ];
+      snap.docs.forEach((doc: DocumentData) => {
         doc.data().createdAt && results.push({ ...doc.data(), id: doc.id });
       });
 

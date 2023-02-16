@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-// using @ means start at the project src root
 import useSignup from "@/hooks/useSignup";
 import { ref } from "vue";
+import type { Ref } from "vue";
 import { useRouter } from "vue-router";
 import { ROUTES_NAME } from "../../router/constants";
 
@@ -21,9 +21,12 @@ export default {
   setup() {
     const { error, signup, isPending } = useSignup();
     const router = useRouter();
-    const email = ref("");
-    const password = ref("");
-    const displayName = ref("");
+
+    const email: Ref<string> = ref("");
+    const password: Ref<string> = ref("");
+    const displayName: Ref<string> = ref("");
+
+    /* METHOS */
     const handleSubmit = async () => {
       const res = await signup(email.value, password.value, displayName.value);
       if (!error.value) {
@@ -35,5 +38,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

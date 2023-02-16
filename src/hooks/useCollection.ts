@@ -1,12 +1,13 @@
-import { ref } from "vue";
+import type { DocumentData } from "firebase/firestore";
+import { ref, type Ref } from "vue";
 import { projectFirestore } from "../firebase/config";
 
-const useCollection = (collection: any) => {
-  const error = ref(null);
+const useCollection = (collection: string) => {
+  const error: Ref<string | null> = ref(null);
   const isPending = ref(false);
 
   // add a new document
-  const addDoc = async (doc: any) => {
+  const addDoc = async (doc: DocumentData) => {
     error.value = null;
     isPending.value = true;
 
@@ -14,8 +15,8 @@ const useCollection = (collection: any) => {
       const res = await projectFirestore.collection(collection).add(doc);
       isPending.value = false;
       return res;
-    } catch (err: any) {
-      (error as any).value = "could not send the message";
+    } catch (err: any | unknown) {
+      error.value = "could not send the message";
       isPending.value = false;
     }
   };

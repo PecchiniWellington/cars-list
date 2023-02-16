@@ -3,7 +3,6 @@
     <router-link
       :to="{ name: ROUTES_NAME.CARFLEET_DETAILS, params: { id: carFleet.id } }"
     >
-      <!-- TODO: cambiare in constanti -->
       <div class="single">
         <div class="thumbnail">
           <img :src="carFleet.coverUrl" />
@@ -26,7 +25,7 @@
 import { ROUTES_NAME } from "../router/constants";
 export default {
   props: ["carsFleet"],
-  setup(props: any) {
+  setup(props) {
     return { ROUTES_NAME, props };
   },
 };

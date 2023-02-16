@@ -1,9 +1,9 @@
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 import { projectAuth } from "../firebase/config";
-const error = ref(null);
+const error: Ref<null | string> = ref(null);
 const isPending = ref(false);
 
-const login = async (email: any, password: any) => {
+const login = async (email: string, password: string) => {
   error.value = null;
   isPending.value = true;
 
@@ -12,9 +12,9 @@ const login = async (email: any, password: any) => {
     error.value = null;
     isPending.value = false;
     return res;
-  } catch (err: any) {
+  } catch (err: any | unknown) {
     isPending.value = false;
-    (error as any).value = "Incorrect login credentials";
+    error.value = "Incorrect login credentials";
   }
 };
 

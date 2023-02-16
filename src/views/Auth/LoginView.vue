@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-// using @ means start at the project src root
 import useLogin from "@/hooks/useLogin";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -20,8 +19,11 @@ export default {
   setup() {
     const { error, login, isPending } = useLogin();
     const router = useRouter();
+
     const email = ref("");
     const password = ref("");
+
+    /* METHODS */
     const handleSubmit = async () => {
       const res = await login(email.value, password.value);
       if (!error.value) {

@@ -12,6 +12,7 @@
 <script lang="ts">
 import { ref } from "vue";
 import useDocument from "@/hooks/useDocument";
+import { COLLECTIONS } from "@/router/constants";
 
 export default {
   props: ["carFleet"],
@@ -19,7 +20,7 @@ export default {
     const title = ref("");
     const showForm = ref(false);
 
-    const { updateDoc } = useDocument("carsFleet", props.carFleet.id);
+    const { updateDoc } = useDocument(COLLECTIONS.CARS_FEET, props.carFleet.id);
     const handleSubmit = async () => {
       const newTag = {
         title: title.value,
