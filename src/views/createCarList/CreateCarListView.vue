@@ -1,27 +1,61 @@
 <template>
-  <div>
+  <div
+    class="container-sm border border-secondary-subtle p-5"
+    style="max-width: 28rem"
+  >
+    <h3 class="mt-2 pb-4 text-center">Create Car Fleet</h3>
     <form @submit.prevent="handleSubmit">
-      <h4>Create a New CarsFleet</h4>
-      <input
-        type="text"
-        required
-        placeholder="CarsFleet title"
-        v-model="title"
-      />
-      <textarea
-        required
-        placeholder="CarsFleet description..."
-        v-model="description"
-      ></textarea>
-      <label>Upload CarsFleet Cover Image</label>
-      <input type="file" @change="handleChange" />
-      <span>OR</span>
-      <label>Copy here URL</label>
-      <input type="text" placeholder="external Url" v-model="externalUrl" />
-      <div class="error">{{ fileError }}</div>
+      <div class="mb-3">
+        <label for="title" class="form-label"> Title Cars Fleet</label>
+        <input
+          class="form-control"
+          id="carsFleetTitle"
+          aria-describedby="CarsFleet title"
+          type="text"
+          required
+          placeholder="CarsFleet title"
+          v-model="title"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          required
+          placeholder="CarsFleet description..."
+          v-model="description"
+        ></textarea>
+      </div>
 
-      <button v-if="!isPending">Create</button>
-      <button v-else disabled>Saving...</button>
+      <label class="form-label">Upload image</label>
+      <div class="mb-3 border border-secondary-subtle p-4">
+        <div class="mb-3">
+          <label for="upload" class="form-label">
+            Choose from you computer</label
+          >
+          <input
+            id="upload"
+            class="form-control"
+            type="file"
+            @change="handleChange"
+          />
+        </div>
+        <div class="mt-2 mb-2 text-center">OR</div>
+        <div class="mb-3">
+          <label for="copy-url" class="form-label">Copy here URL</label>
+          <input
+            id="copy-url"
+            class="form-control"
+            type="text"
+            placeholder="Url"
+            v-model="externalUrl"
+          />
+        </div>
+        <div class="error">{{ fileError }}</div>
+      </div>
+
+      <button class="btn btn-primary" v-if="!isPending">Create</button>
+      <button class="btn btn-secondary" v-else disabled>Saving...</button>
     </form>
   </div>
 </template>
@@ -134,24 +168,3 @@ export default {
   },
 };
 </script>
-
-<style>
-form {
-  background: white;
-}
-
-input[type="file"] {
-  border: 0;
-  padding: 0;
-}
-
-label {
-  font-size: 12px;
-  display: block;
-  margin-top: 30px;
-}
-
-button {
-  margin-top: 20px;
-}
-</style>

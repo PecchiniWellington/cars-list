@@ -1,22 +1,33 @@
 <template>
-  <div v-for="carFleet in carsFleet" :key="carFleet.id">
+  <div v-for="carFleet in carsFleet" :key="carFleet.id" class="card mb-3">
     <router-link
+      class="row g-0"
       v-if="carFleet.id"
       :to="{ name: ROUTES_NAME.CARFLEET_DETAILS, params: { id: carFleet.id } }"
     >
-      <div class="single">
-        <div class="thumbnail">
-          <img :src="carFleet.coverUrl" />
+      <div class="col-md-4 p-4 text-center">
+        <img :src="carFleet?.coverUrl" class="img-fluid rounded-start" />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ carFleet.title }}</h5>
+          <p class="card-text">
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This content is a little bit longer.
+          </p>
+          <p class="card-text">
+            <small class="text-muted">created by {{ carFleet.userName }}</small>
+          </p>
         </div>
-        <div class="info">
-          <h3>{{ carFleet.title }}</h3>
-          <p>created by {{ carFleet.userName }}</p>
-        </div>
-        <div class="tags-container">
-          <div class="tag-number" v-for="tag in carFleet.tags" :key="tag?.id">
-            <p class="tag-title">{{ tag?.title }}</p>
-          </div>
-        </div>
+      </div>
+      <div class="container-sm bg-light">
+        <span
+          class="badge bg-secondary m-2"
+          v-for="tag in carFleet.tags"
+          :key="tag?.id"
+        >
+          {{ tag?.title }}
+        </span>
       </div>
     </router-link>
   </div>
@@ -31,59 +42,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.single {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  background: white;
-  margin: 16px 0;
-  transition: all ease 0.2s;
-}
-
-.single:hover {
-  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
-  transform: scale(1.02);
-  transition: all ease 0.2s;
-}
-
-.thumbnail {
-  max-width: 100px;
-  max-height: 100px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-img {
-  max-width: 150%;
-  max-height: 150%;
-  display: block;
-}
-
-.info {
-  margin: 0 30px;
-}
-
-.tags-container {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.tag-number {
-  margin-left: auto;
-  border: 1px solid #333;
-  background-color: rgb(61, 61, 61);
-  padding: 2px 5px;
-  margin-bottom: 5px;
-  border-radius: 8px;
-}
-
-.tag-title {
-  color: #fff !important;
-}
-</style>

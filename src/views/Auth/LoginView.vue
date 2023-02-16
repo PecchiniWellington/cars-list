@@ -1,17 +1,58 @@
 <template>
-  <div class="login-with-google">
-    <button type="button" @click="loginWithGoogle">Login with Google</button>
-  </div>
-  <span class="brake-or"> OR </span>
+  <div
+    class="container-sm border border-secondary-subtle p-5"
+    style="max-width: 28rem"
+  >
+    <h3 class="mt-2 pb-4 text-center">Login</h3>
+    <div class="card mt-4 mb-4">
+      <button class="btn btn-primary" type="button" @click="loginWithGoogle">
+        Login with Google
+      </button>
+    </div>
 
-  <form @submit.prevent="handleSubmit">
-    <h3>Login</h3>
-    <input type="email" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <div v-if="error" class="error">{{ error }}</div>
-    <button v-if="!isPending" type="submit">Log in</button>
-    <button v-if="isPending" disabled>Loading</button>
-  </form>
+    <div class="mt-2 mb-2 text-center">OR</div>
+
+    <form @submit.prevent="handleSubmit">
+      <div class="mb-3">
+        <label for="email" class="form-label"> Email address </label>
+        <input
+          class="form-control"
+          id="carsFleetTitle"
+          aria-describedby="CarsFleet title"
+          required
+          type="email"
+          placeholder="Email"
+          v-model="email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label"> Password </label>
+        <input
+          class="form-control"
+          id="carsFleetTitle"
+          aria-describedby="CarsFleet title"
+          required
+          type="password"
+          placeholder="Password"
+          v-model="password"
+        />
+      </div>
+      <div class="mb-3">
+        <div
+          v-if="error"
+          class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2"
+        >
+          {{ error }}
+        </div>
+        <button class="btn btn-success" v-if="!isPending" type="submit">
+          Log in
+        </button>
+        <button class="btn btn-secondary" v-if="isPending" disabled>
+          Loading
+        </button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -55,25 +96,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.login-with-google {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
-  border: 1px solid var(--secondary);
-  background: white;
-  display: flex;
-  justify-content: center;
-}
-
-.brake-or {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-}
-</style>

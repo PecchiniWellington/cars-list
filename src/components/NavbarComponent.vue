@@ -1,34 +1,66 @@
 <template>
-  <div class="navbar">
-    <nav>
-      <img class="logo" src="@/assets/ronaldo.jpeg" />
-      <h1>
-        <router-link :to="{ name: ROUTES_NAME.HOME }"
-          >Ronaldo Car fleet</router-link
-        >
-      </h1>
-      <div class="links">
-        <div v-if="user">
-          <router-link class="btn" :to="{ name: ROUTES_NAME.CREATE_CAR }"
-            >Create</router-link
+  <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+    <div class="container-fluid">
+      <div class="navbar-brand">
+        <h1>
+          <router-link :to="{ name: ROUTES_NAME.HOME }"
+            >Ronaldo Car fleet</router-link
           >
-          <router-link class="btn" :to="{ name: ROUTES_NAME.MY_CARFLEET }"
-            >My Car Fleet</router-link
-          >
-          <span>{{ user.displayName }}</span>
-          <button @click="handleClick">Logout</button>
-        </div>
-        <div v-else>
-          <router-link class="btn" :to="{ name: ROUTES_NAME.SIGN_UP }"
-            >Signup</router-link
-          >
-          <router-link class="btn" :to="{ name: ROUTES_NAME.LOGIN }"
-            >Login</router-link
-          >
+        </h1>
+      </div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="user">
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: ROUTES_NAME.CREATE_CAR }"
+              >Create</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              :to="{ name: ROUTES_NAME.MY_CARFLEET }"
+              >My Car Fleet</router-link
+            >
+          </li>
+        </ul>
+        <div class="d-flex" v-if="user">
+          <div class="row">
+            <div class="col text-align-center ps-4">
+              <span>{{ user.displayName }}</span>
+            </div>
+            <div class="col">
+              <button
+                @click="handleClick"
+                class="btn btn-outline-danger"
+                type="submit"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
-  </div>
+      <div id="navbarSupportedContent" class="d-flex" v-if="!user">
+        <router-link class="btn" :to="{ name: ROUTES_NAME.SIGN_UP }">
+          <button class="btn btn-outline-info" type="submit">Signup</button>
+        </router-link>
+        <router-link class="btn" :to="{ name: ROUTES_NAME.LOGIN }">
+          <button class="btn btn-outline-success" type="submit">Login</button>
+        </router-link>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script lang="ts">
@@ -51,46 +83,12 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
-  padding: 16px 10px;
-  margin-bottom: 60px;
-  background: white;
-}
-
-.logo {
-  border-radius: 8%;
-}
-
-nav {
+.text-align-center {
   display: flex;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-nav img {
-  max-height: 60px;
-}
-
-nav h1 {
-  margin-left: 20px;
-}
-
-nav .links {
-  margin-left: auto;
-}
-
-nav .links a,
-button {
-  margin-left: 16px;
-  font-size: 14px;
-}
-
-span {
-  font-size: 14px;
-  display: inline-block;
-  margin-left: 16px;
-  padding-left: 16px;
-  border-left: 1px solid #eee;
+.nav-link.router-link-active {
+  border-bottom: 1px solid red;
 }
 </style>

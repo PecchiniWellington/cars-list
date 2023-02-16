@@ -1,9 +1,12 @@
 <template>
-  <div class="home">
-    <div v-if="error" class="error">Could not fetch the data</div>
-    <div v-if="documents">
-      <ListView :carsFleet="documents" />
-    </div>
+  <div
+    v-if="error"
+    class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2"
+  >
+    Could not fetch the data
+  </div>
+  <div v-if="documents">
+    <ListView :carsFleet="documents" />
   </div>
 </template>
 

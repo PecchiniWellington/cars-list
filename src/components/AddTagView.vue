@@ -1,10 +1,24 @@
 <template>
   <div class="add-tags">
-    <button v-if="!showForm" @click="showForm = true">Add Tags</button>
+    <button class="btn btn-primary" @click="showForm = true" v-if="!showForm">
+      Add Tags
+    </button>
     <form v-if="showForm" @submit.prevent="handleSubmit">
-      <h4>Add a Tag</h4>
-      <input type="text" placeholder="Tag title" required v-model="title" />
-      <button>Add</button>
+      <div class="mb-3 border border-secondary-subtle p-4">
+        <h4>Add a Tag</h4>
+        <input
+          class="form-control"
+          id="tag-title"
+          aria-describedby="CarsFleet title"
+          type="text"
+          required
+          placeholder="Tag title"
+          v-model="title"
+        />
+        <div class="mb-3 pt-4">
+          <button class="btn btn-primary">Add</button>
+        </div>
+      </div>
     </form>
   </div>
 </template>
@@ -36,15 +50,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.add-tags {
-  text-align: center;
-  margin-top: 40px;
-}
-
-form {
-  max-width: 100%;
-  text-align: left;
-}
-</style>

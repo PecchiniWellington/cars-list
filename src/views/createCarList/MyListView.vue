@@ -1,11 +1,11 @@
 <template>
-  <div class="user-carsFleet">
+  <div class="container">
     <h2>My CarFleets</h2>
     <div v-if="carsFleet">
       <ListView :carsFleet="carsFleet" />
     </div>
-    <router-link :to="{ name: ROUTES_NAME.CREATE_CAR }" class="btn">
-      Create a New CarsFleet
+    <router-link :to="{ name: ROUTES_NAME.CREATE_CAR }">
+      <button class="btn btn-primary mb-3">Create New Car Fleet</button>
     </router-link>
   </div>
 </template>
@@ -34,15 +34,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h2 {
-  padding-bottom: 10px;
-  margin-bottom: 30px;
-  border-bottom: 1px solid var(--secondary);
-}
-
-.btn {
-  margin-top: 20px;
-}
-</style>

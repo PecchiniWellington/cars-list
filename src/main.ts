@@ -2,6 +2,8 @@ import { createApp, type App } from "vue";
 import AppVue from "./App.vue";
 import router from "./router";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 import "./assets/main.css";
 import { projectAuth } from "./firebase/config";
 

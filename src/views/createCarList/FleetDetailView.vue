@@ -1,28 +1,82 @@
 <template>
-  <div class="error" v-if="error">{{ error }}</div>
-  <div v-if="carFleet" class="carFleet-details">
-    <!-- carFleet information -->
-    <div class="carFleet-info">
-      <div class="cover">
-        <img :src="carFleet.coverUrl" />
+  <div
+    class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2"
+    v-if="error"
+  >
+    {{ error }}
+  </div>
+
+  <div v-if="carFleet" class="row">
+    <div class="card col" style="width: 18rem">
+      <img :src="carFleet?.coverUrl" class="card-img-top" />
+      <div class="card-body">
+        <h2 class="text-center">{{ carFleet.title }}</h2>
+        <p class="card-text text-center">
+          <small class="text-muted">created by {{ carFleet.userName }}</small>
+        </p>
+        <div class="text-center">
+          <p
+            class="p"
+            v-if="carFleet.description.length < 100 && !readActivated"
+          >
+            {{ carFleet.description }}
+          </p>
+          <p
+            class="p"
+            v-if="carFleet.description.length > 100 && !readActivated"
+          >
+            {{ carFleet.description.slice(0, 100) }}...
+          </p>
+          <p class="p" v-if="readActivated">{{ carFleet.description }}</p>
+          <div class="mb-2" v-if="carFleet.description.length > 100">
+            <button
+              v-if="readActivated"
+              class="read btn btn-secondary"
+              @click="handleReadMore"
+            >
+              ..read less
+            </button>
+            <button
+              v-if="!readActivated"
+              class="read btn btn-secondary"
+              @click="handleReadMore"
+            >
+              ..read more
+            </button>
+          </div>
+          <button class="btn btn-danger" v-if="ownership" @click="handleDelete">
+            Delete Car Fleet
+          </button>
+        </div>
       </div>
-      <h2>{{ carFleet.title }}</h2>
-      <p class="username">Created by {{ carFleet.userName }}</p>
-      <p class="description">{{ carFleet.description }}</p>
-      <button v-if="ownership" @click="handleDelete">Delete CarsFleet</button>
     </div>
 
-    <!-- tags list -->
-    <div class="tags-list">
+    <div class="col">
+      <!-- tags list -->
       <div v-if="!carFleet?.tags?.length">
         No tags have been added to this car fleet yet.
       </div>
-      <div v-for="tags in carFleet.tags" :key="tags.id" class="single-tags">
-        <div class="details">
+      <div v-if="carFleet?.tags?.length">
+        <h3 class="mb-5 text-center">LIST OF TAGS</h3>
+      </div>
+      <div
+        v-for="tags in carFleet.tags"
+        :key="tags.id"
+        class="row g-0 text-center"
+      >
+        <div class="text-start col-sm-6 col-md-8">
           <h3>{{ tags.title }}</h3>
           <p>{{ tags.artist }}</p>
         </div>
-        <button v-if="ownership" @click="handleClick(tags.id)">delete</button>
+        <div class="col-6 col-md-4 text-end">
+          <button
+            class="btn btn-danger"
+            v-if="ownership"
+            @click="handleClick(tags.id)"
+          >
+            delete
+          </button>
+        </div>
       </div>
       <AddTagView v-if="ownership" :carFleet="carFleet" />
     </div>
@@ -30,7 +84,8 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import type { Ref } from "vue";
 import { useRouter } from "vue-router";
 import getDocument from "@/hooks/getDocument";
 import useDocument from "@/hooks/useDocument";
@@ -55,6 +110,8 @@ export default {
     const { deleteImage } = useStorage();
     const router = useRouter();
 
+    let readActivated: Ref<boolean> = ref(false);
+
     const ownership = computed(() => {
       return (
         carFleet.value && user.value && user.value.uid == carFleet.value.userId
@@ -76,64 +133,19 @@ export default {
       }
     };
 
-    return { error, carFleet, ownership, handleDelete, handleClick };
+    const handleReadMore = () => {
+      readActivated.value = !readActivated.value;
+    };
+
+    return {
+      error,
+      carFleet,
+      ownership,
+      handleDelete,
+      handleClick,
+      handleReadMore,
+      readActivated,
+    };
   },
 };
 </script>
-
-<style>
-.carFleet-details {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
-}
-
-.cover {
-  overflow: hidden;
-  border-radius: 20px;
-  position: relative;
-  padding: 160px;
-}
-
-.cover img {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  max-width: 200%;
-  max-height: 200%;
-}
-
-.carFleet-info {
-  text-align: center;
-}
-
-.carFleet-info h2 {
-  text-transform: capitalize;
-  font-size: 28px;
-  margin-top: 20px;
-}
-
-.carFleet-info p {
-  margin-bottom: 20px;
-}
-
-.username {
-  color: #999;
-}
-
-.description {
-  text-align: left;
-}
-
-.single-tags {
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px dashed var(--secondary);
-  margin-bottom: 20px;
-}
-</style>
