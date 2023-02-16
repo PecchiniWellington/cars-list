@@ -1,55 +1,28 @@
 <template>
-  <div
-    class="container-sm border border-secondary-subtle p-5"
-    style="max-width: 28rem"
-  >
+  <div class="container-sm border border-secondary-subtle p-5" style="max-width: 28rem">
     <h3 class="mt-2 pb-4 text-center">Create Car Fleet</h3>
     <form @submit.prevent="handleSubmit">
       <div class="mb-3">
         <label for="title" class="form-label"> Title Cars Fleet</label>
-        <input
-          class="form-control"
-          id="carsFleetTitle"
-          aria-describedby="CarsFleet title"
-          type="text"
-          required
-          placeholder="CarsFleet title"
-          v-model="title"
-        />
+        <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" type="text" required
+          placeholder="CarsFleet title" v-model="title" />
       </div>
       <div class="mb-3">
         <label for="Description" class="form-label">Description</label>
-        <textarea
-          class="form-control"
-          required
-          placeholder="CarsFleet description..."
-          v-model="description"
-        ></textarea>
+        <textarea class="form-control" required placeholder="CarsFleet description..." v-model="description"></textarea>
       </div>
 
       <label class="form-label">Upload image</label>
       <div class="mb-3 border border-secondary-subtle p-4">
         <div class="mb-3">
           <label for="upload" class="form-label">
-            Choose from you computer</label
-          >
-          <input
-            id="upload"
-            class="form-control"
-            type="file"
-            @change="handleChange"
-          />
+            Choose from you computer</label>
+          <input id="upload" class="form-control" type="file" @change="handleChange" />
         </div>
         <div class="mt-2 mb-2 text-center">OR</div>
         <div class="mb-3">
           <label for="copy-url" class="form-label">Copy here URL</label>
-          <input
-            id="copy-url"
-            class="form-control"
-            type="text"
-            placeholder="Url"
-            v-model="externalUrl"
-          />
+          <input id="copy-url" class="form-control" type="text" placeholder="Url" v-model="externalUrl" />
         </div>
         <div class="error">{{ fileError }}</div>
       </div>
@@ -111,13 +84,13 @@ export default {
           createdAt: timestamp(),
         });
 
-        isPending.value = false;
         if (!error.value) {
           router.push({
             name: ROUTES_NAME.CARFLEET_DETAILS,
-            params: res?.id as RouteParamsRaw | undefined,
+            params: { id: res?.id},
           });
         }
+        isPending.value = false;
       } else {
         /* TODO: clean up */
         isPending.value = true;
@@ -134,11 +107,13 @@ export default {
         });
 
         isPending.value = false;
-        if (!error.value) {
-          router.push({
-            name: ROUTES_NAME.CARFLEET_DETAILS,
-            params: res?.id as RouteParamsRaw | undefined,
-          });
+        if (error.value == null) {
+          if (res?.id) {
+            router.push({
+              name: ROUTES_NAME.CARFLEET_DETAILS,
+              params: { id: res?.id},
+            });
+          }
         }
       }
     };
