@@ -18,9 +18,7 @@ const getCollection = (collection: any, query?: any) => {
 
   const unsub = collectionRef.onSnapshot(
     (snap) => {
-      const results: [{ doc: DocumentData; id: string }] = [
-        { doc: {} , id: "" },
-      ];
+      const results: { doc: DocumentData; id: string }[] = [];
       snap.docs.forEach((doc: DocumentData) => {
         doc.data().createdAt && results.push({ ...doc.data(), id: doc.id });
       });
@@ -28,7 +26,7 @@ const getCollection = (collection: any, query?: any) => {
       documents.value = results;
       error.value = null;
     },
-    (err) => {
+    () => {
       documents.value = null;
       error.value = "could not fetch the data";
     }

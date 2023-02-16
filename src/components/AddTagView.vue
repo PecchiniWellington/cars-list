@@ -27,7 +27,7 @@ export default {
         id: Math.floor(Math.random() * 1000000),
       };
 
-      const res = await updateDoc({
+      await updateDoc({
         tags: [...props.carFleet.tags, newTag],
       });
       title.value = "";

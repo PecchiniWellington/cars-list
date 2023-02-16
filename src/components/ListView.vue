@@ -1,6 +1,7 @@
 <template>
   <div v-for="carFleet in carsFleet" :key="carFleet.id">
     <router-link
+      v-if="carFleet.id"
       :to="{ name: ROUTES_NAME.CARFLEET_DETAILS, params: { id: carFleet.id } }"
     >
       <div class="single">

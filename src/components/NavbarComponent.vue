@@ -13,7 +13,7 @@
             >Create</router-link
           >
           <router-link class="btn" :to="{ name: ROUTES_NAME.MY_CARFLEET }"
-            >My carFleet</router-link
+            >My Car Fleet</router-link
           >
           <span>{{ user.displayName }}</span>
           <button @click="handleClick">Logout</button>

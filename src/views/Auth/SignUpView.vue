@@ -28,7 +28,7 @@ export default {
 
     /* METHOS */
     const handleSubmit = async () => {
-      const res = await signup(email.value, password.value, displayName.value);
+      await signup(email.value, password.value, displayName.value);
       if (!error.value) {
         router.push({ name: ROUTES_NAME.MY_CARFLEET });
       }

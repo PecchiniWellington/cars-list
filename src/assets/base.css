@@ -53,6 +53,8 @@ form {
   border: 1px solid  var(--secondary);
   background: white;
 }
+
+
 input, textarea {
   border: 0;
   border-bottom: 1px solid var(--secondary);

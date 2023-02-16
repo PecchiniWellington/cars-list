@@ -2,7 +2,7 @@ import { watchEffect, ref, type Ref } from "vue";
 import { projectFirestore } from "../firebase/config";
 
 const getDocument = (collection: string, id: string) => {
-  const document: any = null;
+  const document: Ref<any> = ref(null);
   const error: Ref<null | string> = ref(null);
 
   const documentRef = projectFirestore.collection(collection).doc(id);
@@ -13,11 +13,11 @@ const getDocument = (collection: string, id: string) => {
         document.value = { ...doc.data(), id: doc.id };
         error.value = null;
       } else {
-        error.value = "that document does not exist";
+        error.value = "document does not exist";
       }
     },
-    (err) => {
-      error.value = "problem fetching the document";
+    () => {
+      error.value = "fetching the document error";
     }
   );
 

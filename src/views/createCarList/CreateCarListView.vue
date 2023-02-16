@@ -2,8 +2,17 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <h4>Create a New CarsFleet</h4>
-      <input type="text" required placeholder="CarsFleet title" v-model="title" />
-      <textarea required placeholder="CarsFleet description..." v-model="description"></textarea>
+      <input
+        type="text"
+        required
+        placeholder="CarsFleet title"
+        v-model="title"
+      />
+      <textarea
+        required
+        placeholder="CarsFleet description..."
+        v-model="description"
+      ></textarea>
       <label>Upload CarsFleet Cover Image</label>
       <input type="file" @change="handleChange" />
       <span>OR</span>

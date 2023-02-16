@@ -43,8 +43,14 @@ export default {
   props: ["id"],
   components: { AddTagView },
   setup(props) {
-    const { error, document: carFleet } = getDocument(COLLECTIONS.CARS_FEET, props.id);
-    const { deleteDoc, updateDoc } = useDocument(COLLECTIONS.CARS_FEET, props.id);
+    const { error, document: carFleet } = getDocument(
+      COLLECTIONS.CARS_FEET,
+      props.id
+    );
+    const { deleteDoc, updateDoc } = useDocument(
+      COLLECTIONS.CARS_FEET,
+      props.id
+    );
     const { user } = getUser();
     const { deleteImage } = useStorage();
     const router = useRouter();
@@ -55,6 +61,7 @@ export default {
       );
     });
 
+    /* METHODS */
     const handleDelete = async () => {
       await deleteImage(carFleet.value.filePath);
       await deleteDoc();
