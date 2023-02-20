@@ -3,13 +3,17 @@
 
 /* variables */
 :root {
-  --primary_text: #4f515a;
+  --primary_text: #fff;
   --warning_text: #da0f41;
 }
 
 a {
+
   text-decoration: none;
-  color: var(--primary_text);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0px 10px 30px black;
+  border-radius: 8px !important;
 }
 
 /* error text */
@@ -17,4 +21,9 @@ a {
   color: var(--warning);
   font-size: 14px;
   margin: 16px 0;
+}
+
+html{
+background-color: #0f2024;
+color: var(--primary_text);
 }

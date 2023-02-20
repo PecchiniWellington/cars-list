@@ -1,35 +1,40 @@
 <template>
-  <div class="container-sm border border-secondary-subtle p-5" style="max-width: 28rem">
-    <h3 class="mt-2 pb-4 text-center">Create Car Fleet</h3>
-    <form @submit.prevent="handleSubmit">
-      <div class="mb-3">
-        <label for="title" class="form-label"> Title Cars Fleet</label>
-        <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" type="text" required
-          placeholder="CarsFleet title" v-model="title" />
-      </div>
-      <div class="mb-3">
-        <label for="Description" class="form-label">Description</label>
-        <textarea class="form-control" required placeholder="CarsFleet description..." v-model="description"></textarea>
-      </div>
+  <div class="create-container">
 
-      <label class="form-label">Upload image</label>
-      <div class="mb-3 border border-secondary-subtle p-4">
+    <div class="container  p-5 card-create-container" style="max-width: 28rem">
+      <div id="overlay"></div>
+      <h3 class="mt-2 pb-4 text-center">Create Car Fleet</h3>
+      <form @submit.prevent="handleSubmit">
         <div class="mb-3">
-          <label for="upload" class="form-label">
-            Choose from you computer</label>
-          <input id="upload" class="form-control" type="file" @change="handleChange" />
+          <label for="title" class="form-label"> Title Cars Fleet</label>
+          <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" type="text" required
+            placeholder="CarsFleet title" v-model="title" />
         </div>
-        <div class="mt-2 mb-2 text-center">OR</div>
         <div class="mb-3">
-          <label for="copy-url" class="form-label">Copy here URL</label>
-          <input id="copy-url" class="form-control" type="text" placeholder="Url" v-model="externalUrl" />
+          <label for="Description" class="form-label">Description</label>
+          <textarea class="form-control" required placeholder="CarsFleet description..."
+            v-model="description"></textarea>
         </div>
-        <div class="error">{{ fileError }}</div>
-      </div>
 
-      <button class="btn btn-primary" v-if="!isPending">Create</button>
-      <button class="btn btn-secondary" v-else disabled>Saving...</button>
-    </form>
+        <label class="form-label">Upload image</label>
+        <div class="p-4 mb-4  img-container">
+          <div class="mb-3">
+            <label for="upload" class="form-label">
+              Choose from you computer</label>
+            <input id="upload" class="form-control" type="file" @change="handleChange" />
+          </div>
+          <div class="mt-2 mb-2 text-center">OR</div>
+          <div class="mb-3">
+            <label for="copy-url" class="form-label">Copy here URL</label>
+            <input id="copy-url" class="form-control" type="text" placeholder="Url" v-model="externalUrl" />
+          </div>
+          <div class="error">{{ fileError }}</div>
+        </div>
+
+        <button class="btn  btn-create" v-if="!isPending">Create</button>
+        <button class="btn btn-secondary" v-else disabled>Saving...</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -87,7 +92,7 @@ export default {
         if (!error.value) {
           router.push({
             name: ROUTES_NAME.CARFLEET_DETAILS,
-            params: { id: res?.id},
+            params: { id: res?.id },
           });
         }
         isPending.value = false;
@@ -111,7 +116,7 @@ export default {
           if (res?.id) {
             router.push({
               name: ROUTES_NAME.CARFLEET_DETAILS,
-              params: { id: res?.id},
+              params: { id: res?.id },
             });
           }
         }
@@ -143,3 +148,51 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.create-container {
+  height: calc(100vh - 68px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(@/assets/dark.webp) no-repeat 50%;
+  background-color: rgba(0, 0, 0, 0.361);
+  background-size: 100% 130%;
+}
+
+.card-create-container {
+  box-shadow: 0px 25px 60px black;
+  border-radius: 8px;
+  background-color: #0c1c20;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.btn-create{
+  width: 100%;
+  background-color: #093636;
+  color: #fff;
+  font-size: calc(1.3rem + .6vw);
+}
+.btn-create:hover{
+  background-color: #0b4242;
+}
+
+.img-container{
+  background-color: #0a1619;
+  box-shadow: 0px 25px 60px black;
+}
+</style>

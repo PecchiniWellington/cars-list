@@ -1,62 +1,29 @@
 <template>
-  <div
-    class="container-sm border border-secondary-subtle p-5"
-    style="max-width: 28rem"
-  >
-    <h3 class="mt-2 pb-4 text-center">Sign Up</h3>
-    <form @submit.prevent="handleSubmit">
-      <div class="mb-3">
-        <label for="displayName" class="form-label"> User Name </label>
-        <input
-          class="form-control"
-          id="displayName"
-          aria-describedby="display Name"
-          required
-          type="text"
-          placeholder="User name"
-          v-model="displayName"
-        />
+  <div class="input-box">
+  
+  <form @submit.prevent="handleSubmit">
+    <div class="mb-3">
+      <label for="email" class="form-label label"> Email </label>
+      <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" required
+        type="email" placeholder="Email" v-model="email" />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label label"> Password </label>
+      <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" required
+        type="password" placeholder="Password" v-model="password" />
+    </div>
+    <div class="mb-3">
+      <div v-if="error"
+        class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2">
+        {{ error }}
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label"> Email address </label>
-        <input
-          class="form-control"
-          id="carsFleetTitle"
-          aria-describedby="CarsFleet title"
-          required
-          type="email"
-          placeholder="Email"
-          v-model="email"
-        />
+      <div class="input-field btn-submit">
+        <input type="submit" class="submit" value="Log in" v-if="!isPending">
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label"> Password </label>
-        <input
-          class="form-control"
-          id="carsFleetTitle"
-          aria-describedby="CarsFleet title"
-          required
-          type="password"
-          placeholder="Password"
-          v-model="password"
-        />
-      </div>
-      <div class="mb-3">
-        <div
-          v-if="error"
-          class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2"
-        >
-          {{ error }}
-        </div>
-        <button class="btn btn-success" v-if="!isPending" type="submit">
-          Sign Up
-        </button>
-        <button class="btn btn-secondary" v-if="isPending" disabled>
-          Loading
-        </button>
-      </div>
-    </form>
-  </div>
+      <SpinnerView v-if="isPending" />
+    </div>
+  </form>
+</div>
 </template>
 
 <script lang="ts">
@@ -87,3 +54,42 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+
+
+.label {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.input-box {
+  width: 330px;
+  box-sizing: border-box;
+  margin-top: -25px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+.submit {
+  border: none;
+  outline: none;
+  height: 45px;
+  background: #ececec;
+  border-radius: 5px;
+  transition: .4s;
+  font-size: 1.25rem;
+  margin-top: 40px;
+}
+
+.submit:hover {
+  background: #093636;
+  color: #fff;
+}
+</style>

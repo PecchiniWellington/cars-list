@@ -5,7 +5,7 @@ import {
   type RouteLocationNormalized,
 } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import LoginView from "../views/Auth/LoginView.vue";
+import CredentialView from "../views/Auth/CredentialView.vue";
 import SignUpView from "@/views/Auth/SignUpView.vue";
 import CreateCarListView from "@/views/createCarList/CreateCarListView.vue";
 import FleetDetailView from "@/views/createCarList/FleetDetailView.vue";
@@ -38,7 +38,7 @@ const router = createRouter({
     {
       path: "/login",
       name: ROUTES_NAME.LOGIN,
-      component: LoginView,
+      component: CredentialView,
     },
     {
       path: "/signup",

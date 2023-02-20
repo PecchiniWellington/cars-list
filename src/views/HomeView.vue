@@ -5,7 +5,7 @@
   >
     Could not fetch the data
   </div>
-  <div v-if="documents">
+  <div v-if="documents" class="container-fluid home">
     <ListView :carsFleet="documents" />
   </div>
 </template>
@@ -23,3 +23,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.home{
+  padding: 40px;
+    background-color: #0f2024;
+    width: 100%;
+}
+</style>

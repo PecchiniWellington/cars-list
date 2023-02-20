@@ -1,1 +1,14 @@
-@import './base.css';
+@import "./base.css";
+
+body{
+    background-color: #333;
+    color: var(--primary_text) !important;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0px 10px 30px black;
+    border-radius: 8px !important;
+}

@@ -4,19 +4,12 @@
       Add Tags
     </button>
     <form v-if="showForm" @submit.prevent="handleSubmit">
-      <div class="mb-3 border border-secondary-subtle p-4">
+      <div class="mb-3 p-4">
         <h4>Add a Tag</h4>
-        <input
-          class="form-control"
-          id="tag-title"
-          aria-describedby="CarsFleet title"
-          type="text"
-          required
-          placeholder="Tag title"
-          v-model="title"
-        />
+        <input class="form-control" id="tag-title" aria-describedby="CarsFleet title" type="text" required
+          placeholder="Tag title" v-model="title" />
         <div class="mb-3 pt-4">
-          <button class="btn btn-primary">Add</button>
+          <button class="btn btn-primary">ADD</button>
         </div>
       </div>
     </form>
@@ -50,3 +43,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn {
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .add-tags {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+}
+</style>
