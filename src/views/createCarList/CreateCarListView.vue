@@ -1,37 +1,59 @@
 <template>
   <div class="create-container">
-
-    <div class="container  p-5 card-create-container" style="max-width: 28rem">
+    <div class="container p-5 card-create-container" style="max-width: 28rem">
       <div id="overlay"></div>
       <h3 class="mt-2 pb-4 text-center">Create Car Fleet</h3>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3">
           <label for="title" class="form-label"> Title Cars Fleet</label>
-          <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" type="text" required
-            placeholder="CarsFleet title" v-model="title" />
+          <input
+            class="form-control"
+            id="carsFleetTitle"
+            aria-describedby="CarsFleet title"
+            type="text"
+            required
+            placeholder="CarsFleet title"
+            v-model="title"
+          />
         </div>
         <div class="mb-3">
           <label for="Description" class="form-label">Description</label>
-          <textarea class="form-control" required placeholder="CarsFleet description..."
-            v-model="description"></textarea>
+          <textarea
+            class="form-control"
+            required
+            placeholder="CarsFleet description..."
+            v-model="description"
+          ></textarea>
         </div>
 
         <label class="form-label">Upload image</label>
-        <div class="p-4 mb-4  img-container">
+        <div class="p-4 mb-4 img-container">
           <div class="mb-3">
             <label for="upload" class="form-label">
-              Choose from you computer</label>
-            <input id="upload" class="form-control" type="file" @change="handleChange" />
+              Choose from you computer</label
+            >
+            <input
+              id="upload"
+              class="form-control"
+              type="file"
+              @change="handleChange"
+            />
           </div>
           <div class="mt-2 mb-2 text-center">OR</div>
           <div class="mb-3">
             <label for="copy-url" class="form-label">Copy here URL</label>
-            <input id="copy-url" class="form-control" type="text" placeholder="Url" v-model="externalUrl" />
+            <input
+              id="copy-url"
+              class="form-control"
+              type="text"
+              placeholder="Url"
+              v-model="externalUrl"
+            />
           </div>
           <div class="error">{{ fileError }}</div>
         </div>
 
-        <button class="btn  btn-create" v-if="!isPending">Create</button>
+        <button class="btn btn-create" v-if="!isPending">Create</button>
         <button class="btn btn-secondary" v-else disabled>Saving...</button>
       </form>
     </div>
@@ -181,17 +203,17 @@ export default {
   cursor: pointer;
 }
 
-.btn-create{
+.btn-create {
   width: 100%;
   background-color: #093636;
   color: #fff;
-  font-size: calc(1.3rem + .6vw);
+  font-size: calc(1.3rem + 0.6vw);
 }
-.btn-create:hover{
+.btn-create:hover {
   background-color: #0b4242;
 }
 
-.img-container{
+.img-container {
   background-color: #0a1619;
   box-shadow: 0px 25px 60px black;
 }

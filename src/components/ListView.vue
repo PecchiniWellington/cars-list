@@ -1,8 +1,14 @@
 <template>
   <div v-for="carFleet in carsFleet" :key="carFleet.id" class="card mb-3">
     <div class="card-cont">
-      <router-link class="row g-0" v-if="carFleet.id"
-        :to="{ name: ROUTES_NAME.CARFLEET_DETAILS, params: { id: carFleet.id } }">
+      <router-link
+        class="row g-0"
+        v-if="carFleet.id"
+        :to="{
+          name: ROUTES_NAME.CARFLEET_DETAILS,
+          params: { id: carFleet.id },
+        }"
+      >
         <div class="col-md-4 p-4 text-center img-card">
           <img :src="carFleet?.coverUrl" class="img-fluid rounded-start" />
         </div>
@@ -10,22 +16,28 @@
           <div class="card-body">
             <h5 class="card-title">{{ carFleet.title.toUpperCase() }}</h5>
             <p class="card-text">
-              This is a wider card with supporting text below as a natural lead-in
-              to additional content. This content is a little bit longer.
+              This is a wider card with supporting text below as a natural
+              lead-in to additional content. This content is a little bit
+              longer.
             </p>
             <p class="card-text created-by">
-              <small class="text-muted">Created by {{ carFleet.userName }}</small>
+              <small class="text-muted"
+                >Created by {{ carFleet.userName }}</small
+              >
             </p>
           </div>
         </div>
         <div class="container-sm bg-light footer-card">
-          <span class="badge bg-secondary m-2" v-for="tag in carFleet.tags" :key="tag?.id">
+          <span
+            class="badge bg-secondary m-2"
+            v-for="tag in carFleet.tags"
+            :key="tag?.id"
+          >
             {{ tag?.title }}
           </span>
         </div>
       </router-link>
     </div>
-
 
     <div class="link-to"></div>
   </div>
@@ -49,21 +61,19 @@ export default {
   position: relative;
 }
 
-
 .card-cont {
   transition: all 1s;
   width: 100%;
 }
 
-.card:hover>.link-to {
+.card:hover > .link-to {
   background-color: #093636;
   z-index: 1;
   width: 30px;
-  transition: width 0.5s ease-in-out ;
-
+  transition: width 0.5s ease-in-out;
 }
 
-.card:hover>.card-cont {
+.card:hover > .card-cont {
   width: calc(100% - 30px);
   transition: width 0.5s ease-in-out;
 }
@@ -83,7 +93,7 @@ export default {
 }
 
 .created-by {
-  margin-top: auto
+  margin-top: auto;
 }
 
 .footer-card {

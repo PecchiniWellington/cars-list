@@ -1,29 +1,49 @@
 <template>
   <div class="input-box">
-  
-  <form @submit.prevent="handleSubmit">
-    <div class="mb-3">
-      <label for="email" class="form-label label"> Email </label>
-      <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" required
-        type="email" placeholder="Email" v-model="email" />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label label"> Password </label>
-      <input class="form-control" id="carsFleetTitle" aria-describedby="CarsFleet title" required
-        type="password" placeholder="Password" v-model="password" />
-    </div>
-    <div class="mb-3">
-      <div v-if="error"
-        class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2">
-        {{ error }}
+    <form @submit.prevent="handleSubmit">
+      <div class="mb-3">
+        <label for="email" class="form-label label"> Email </label>
+        <input
+          class="form-control"
+          id="carsFleetTitle"
+          aria-describedby="CarsFleet title"
+          required
+          type="email"
+          placeholder="Email"
+          v-model="email"
+        />
       </div>
-      <div class="input-field btn-submit">
-        <input type="submit" class="submit" value="Log in" v-if="!isPending">
+      <div class="mb-3">
+        <label for="password" class="form-label label"> Password </label>
+        <input
+          class="form-control"
+          id="carsFleetTitle"
+          aria-describedby="CarsFleet title"
+          required
+          type="password"
+          placeholder="Password"
+          v-model="password"
+        />
       </div>
-      <SpinnerView v-if="isPending" />
-    </div>
-  </form>
-</div>
+      <div class="mb-3">
+        <div
+          v-if="error"
+          class="text-danger-emphasis bg-danger-subtle border border-dander-subtle rounded-3 p-2 mt-2 mb-2"
+        >
+          {{ error }}
+        </div>
+        <div class="input-field btn-submit">
+          <input
+            type="submit"
+            class="submit"
+            value="Log in"
+            v-if="!isPending"
+          />
+        </div>
+        <SpinnerView v-if="isPending" />
+      </div>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -55,10 +75,7 @@ export default {
 };
 </script>
 
-
 <style scoped>
-
-
 .label {
   font-size: 1.25rem;
   color: #333;
@@ -76,14 +93,13 @@ export default {
   position: relative;
 }
 
-
 .submit {
   border: none;
   outline: none;
   height: 45px;
   background: #ececec;
   border-radius: 5px;
-  transition: .4s;
+  transition: 0.4s;
   font-size: 1.25rem;
   margin-top: 40px;
 }

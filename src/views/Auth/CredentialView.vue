@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <video autoplay muted loop id="myVideo">
-      <source src="@/assets/modern.mp4" type="video/mp4">
+      <source src="@/assets/modern.mp4" type="video/mp4" />
     </video>
 
     <div class="container-fluid main">
@@ -10,8 +10,11 @@
           <!-------Image-------->
           <div class="logo-contentainer">
             <div class="container-l">
-              <img class="logo" src="@/assets/logo-cristiano-ronaldo.jpeg" alt="">
-
+              <img
+                class="logo"
+                src="@/assets/logo-cristiano-ronaldo.jpeg"
+                alt=""
+              />
             </div>
             <h5 class="subtitle">Welcome to Cristiano's fleet</h5>
           </div>
@@ -19,25 +22,47 @@
         <div class="col-md-6 right">
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                <h5 class="text-white">
-                  Login
-                </h5>
+              <button
+                class="nav-link active"
+                id="nav-home-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-home"
+                type="button"
+                role="tab"
+                aria-controls="nav-home"
+                aria-selected="true"
+              >
+                <h5 class="text-white">Login</h5>
               </button>
-              <button class="nav-link" id="nav-signup-tab" data-bs-toggle="tab" data-bs-target="#nav-signup"
-                type="button" role="tab" aria-controls="nav-signup" aria-selected="false">
-                <h5 class="text-white">
-                  Sign Up
-                </h5>
+              <button
+                class="nav-link"
+                id="nav-signup-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-signup"
+                type="button"
+                role="tab"
+                aria-controls="nav-signup"
+                aria-selected="false"
+              >
+                <h5 class="text-white">Sign Up</h5>
               </button>
             </div>
           </nav>
           <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active p-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div
+              class="tab-pane fade show active p-3"
+              id="nav-home"
+              role="tabpanel"
+              aria-labelledby="nav-home-tab"
+            >
               <LoginView />
             </div>
-            <div class="tab-pane fade show p-3" id="nav-signup" role="tabpanel" aria-labelledby="nav-signup-tab">
+            <div
+              class="tab-pane fade show p-3"
+              id="nav-signup"
+              role="tabpanel"
+              aria-labelledby="nav-signup-tab"
+            >
               <SignUp />
             </div>
           </div>
@@ -60,7 +85,6 @@ export default {
   components: {
     LoginView,
     SignUp,
-
   },
   setup() {
     const { error, login, isPending } = useLogin();
@@ -135,7 +159,7 @@ export default {
 }
 
 .bg-img {
-  content: ' ';
+  content: " ";
   display: block;
   position: absolute;
   top: 0;
@@ -145,7 +169,6 @@ export default {
   background: url(/src/assets/logo-cristiano-ronaldo.jpeg) no-repeat 50%;
   height: 100vh;
   width: 100vw;
-
 }
 
 .logo {
@@ -174,7 +197,7 @@ export default {
   height: 100%;
 }
 
-.tab-content>.active {
+.tab-content > .active {
   display: flex;
   align-items: center;
   height: 100%;
@@ -182,7 +205,7 @@ export default {
 }
 
 .tab-pane {
-  margin: 0px 20px 50px 20px
+  margin: 0px 20px 50px 20px;
 }
 
 .nav-tabs {
@@ -197,11 +220,10 @@ export default {
   border: none;
   border-bottom: 2px solid #21c5c5 !important;
   background-color: #093636 !important;
-
 }
 
 .nav-link:hover {
-  border: none
+  border: none;
 }
 
 @media only screen and (max-width: 768px) {
@@ -222,11 +244,9 @@ export default {
 
   .right {
     padding-bottom: 20px;
-
   }
 
   .row {
-
     width: 100%;
   }
 }

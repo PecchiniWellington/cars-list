@@ -1,9 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg  nav-container">
+  <nav class="navbar navbar-expand-lg nav-container">
     <div class="container-fluid">
       <div class="navbar-brand">
         <router-link :to="{ name: ROUTES_NAME.HOME }">
-          <img class="logo" src="@/assets/logo-cristiano-ronaldo.jpeg" alt="">
+          <img class="logo" src="@/assets/logo-cristiano-ronaldo.jpeg" alt="" />
         </router-link>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -42,7 +42,6 @@
       </div>
     </div>
   </nav>
-
 </template>
 
 <script lang="ts">
@@ -62,11 +61,9 @@ export default {
       router.push({ name: ROUTES_NAME.LOGIN });
     };
 
-
     const display: any = computed(() => {
-      return (user.value ? 'block' : 'none');
+      return user.value ? "block" : "none";
     });
-
 
     return { handleClick, user, ROUTES_NAME, display };
   },
@@ -105,19 +102,41 @@ export default {
   color: #ffff;
 }
 
-navbar-toggler {
-  color: #fff;
-}
-.nav-item{
+.nav-item {
   margin-left: 10px;
 }
 
+.navbar-toggler-icon {
+  /* background-color: rgb(9, 54, 54); */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(9, 54, 54)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  border: none;
+    outline: none;
+  }
+  .navbar-toggler{
+  color: transparent !important;
+  border: none;
+    outline: none;
+}
+.navbar-toggler:active {
+  border: none;
+    outline: none;
+  /* border: 1px solid rgb(9, 54, 54); */
+}
+button{
+  border: none !important;
+    outline: none !important;
+}
+
 @media only screen and (max-width: 600px) {
-  .nav-item{
+  .nav-item {
     margin-left: 10px;
   }
-  .d-flex{
+
+  .d-flex {
     margin-left: 10px;
+  }
+  .navbar-collapse{
+    margin-top: 10px !important;
   }
 }
 </style>

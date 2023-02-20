@@ -36,22 +36,20 @@ export default {
 </script>
 
 <style scoped>
-.my-car-fleet{
+.my-car-fleet {
   padding-top: 40px;
-  min-height:calc(100vh - 77px);
+  min-height: calc(100vh - 77px);
   background-color: #0f2024;
 }
 
-.create-fleet{
+.create-fleet {
   background-color: #286b6b;
   color: #ffff;
   box-shadow: 0px 5px 30px black;
-
 }
 
-.create-fleet:hover{
+.create-fleet:hover {
   background-color: #147d7d;
   color: #ffff;
-
 }
 </style>

@@ -24,9 +24,9 @@ export default {
 };
 </script>
 <style scoped>
-.home{
+.home {
   padding: 40px;
-    background-color: #0f2024;
-    width: 100%;
+  background-color: #0f2024;
+  width: 100%;
 }
 </style>

@@ -6,8 +6,15 @@
     <form v-if="showForm" @submit.prevent="handleSubmit">
       <div class="mb-3 p-4">
         <h4>Add a Tag</h4>
-        <input class="form-control" id="tag-title" aria-describedby="CarsFleet title" type="text" required
-          placeholder="Tag title" v-model="title" />
+        <input
+          class="form-control"
+          id="tag-title"
+          aria-describedby="CarsFleet title"
+          type="text"
+          required
+          placeholder="Tag title"
+          v-model="title"
+        />
         <div class="mb-3 pt-4">
           <button class="btn btn-primary">ADD</button>
         </div>
@@ -54,6 +61,5 @@ export default {
     margin-top: 20px;
     width: 100%;
   }
-
 }
 </style>
